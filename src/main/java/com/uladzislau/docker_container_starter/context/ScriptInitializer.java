@@ -4,13 +4,16 @@ import com.uladzislau.docker_container_starter.config.properties.classes.Postgre
 import com.uladzislau.docker_container_starter.config.properties.constant.PropertiesConstants;
 import com.uladzislau.docker_container_starter.docker.postgres.PostgresContainerInitializer;
 import lombok.SneakyThrows;
+import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.env.ConfigurableEnvironment;
 
+import javax.sql.DataSource;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
+@AutoConfigureBefore(DataSource.class)
 public class ScriptInitializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
 
     @SneakyThrows
@@ -26,7 +29,7 @@ public class ScriptInitializer implements ApplicationContextInitializer<Configur
         String startProfile = setUpProperties(environment, defaultProps);
         if (Arrays.asList(environment.getActiveProfiles()).contains(startProfile)) {
             PostgresContainerInitializer.initPostgresContainer();
-            TimeUnit.SECONDS.sleep(3);
+//            TimeUnit.SECONDS.sleep(3);
         }
     }
 

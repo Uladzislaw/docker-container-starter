@@ -8,7 +8,7 @@ public class TerminalScriptExecutor {
         ProcessBuilder processBuilder = new ProcessBuilder();
 
         String[] terminalCommands = new String[3];
-        if (DeveloperSystem.OS.split("\\s+")[0].equalsIgnoreCase("windows")) {
+        if (DeveloperSystem.OS.equalsIgnoreCase("windows")) {
             terminalCommands[0] = "cmd";
             terminalCommands[1] = "/c";
         } else {
@@ -25,6 +25,7 @@ public class TerminalScriptExecutor {
     }
 
     public static class DeveloperSystem {
-        public static final String OS = System.getProperty("os.name");
+        public static final String OS
+                = System.getProperty("os.name").split("\\s+")[0];
     }
 }
