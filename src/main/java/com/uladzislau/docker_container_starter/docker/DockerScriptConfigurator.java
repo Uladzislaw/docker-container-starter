@@ -16,7 +16,7 @@ public class DockerScriptConfigurator {
         LOG_CONTAINER_INTO_FILE("docker logs %s > %s"),
         DOCKER_PS("docker ps %s");
 
-        private String s;
+        private final String s;
 
         DockerScript(String s) {
             this.s = s;

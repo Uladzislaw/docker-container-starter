@@ -1,3 +1,2 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.uladzislau.docker_container_starter.exec.TerminalScriptExecutor
-
-org.springframework.context.ApplicationContextInitializer=com.uladzislau.docker_container_starter.context.ScriptInitializer
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.uladzislau.docker_container_starter.config.StarterConfiguration
+org.springframework.context.ApplicationContextInitializer=com.uladzislau.docker_container_starter.context.StarterPropertiesInitializer

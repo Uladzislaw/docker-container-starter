@@ -8,8 +8,8 @@ public class PropertiesConstants {
     public static final String NONE = "none";
     public static final String CONSOLE = "console";
     private static final String DOT = ".";
-    public static final String START_ON_PROFILE = LIB_NAME + DOT + "start_on_profile";
-    public static final String SCRIPT = LIB_NAME + DOT + "script";
+    public static final String START_ON_PROFILE = LIB_NAME + DOT + "profile";
+    public static final String MODE = LIB_NAME + DOT + "mode";
     public static final String LOG = LIB_NAME + DOT + "logging";
     public static final String LOG_ENABLED = LOG + DOT + "enabled";
     public static final String CONTAINER = LIB_NAME + DOT + "container";

@@ -1,6 +1,6 @@
 package com.uladzislau.docker_container_starter.docker.postgres;
 
-import com.uladzislau.docker_container_starter.config.properties.classes.PostgresInDockerProperties;
+import com.uladzislau.docker_container_starter.config.properties.classes.DeveloperProperties;
 import com.uladzislau.docker_container_starter.config.properties.constant.PropertiesConstants;
 import com.uladzislau.docker_container_starter.docker.DockerContainerLogCollector;
 import com.uladzislau.docker_container_starter.docker.DockerExistingContainerInspector;
@@ -16,7 +16,7 @@ public class PostgresContainerInitializer {
         log.info("Postgres container initialization started...");
 
         DockerContainerLogCollector logCollector = new DockerContainerLogCollector();
-        PostgresInDockerProperties properties = PostgresInDockerProperties.getInstance();
+        DeveloperProperties properties = DeveloperProperties.getInstance();
         DockerExistingContainerInspector containerInspector = new DockerExistingContainerInspector();
 
         String image = properties.getImage().getName();
@@ -46,7 +46,7 @@ public class PostgresContainerInitializer {
         log.info("Container " + container + " is up now.");
     }
 
-    private static void runAndBuildImage(PostgresInDockerProperties properties,
+    private static void runAndBuildImage(DeveloperProperties properties,
                                          DockerContainerLogCollector logCollector,
                                          String image, String container) {
         log.info("Building image " + image + "...");

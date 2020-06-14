@@ -9,11 +9,11 @@ public class OnPostgresInDockerStopperCondition extends AnyNestedCondition {
         super(ConfigurationPhase.REGISTER_BEAN);
     }
 
-    @ConditionalOnProperty(value = PropertiesConstants.SCRIPT, havingValue = PropertiesConstants.CREATE_STOP)
+    @ConditionalOnProperty(value = PropertiesConstants.MODE, havingValue = PropertiesConstants.CREATE_STOP)
     public static class R {
     }
 
-    @ConditionalOnProperty(value = PropertiesConstants.SCRIPT, havingValue = PropertiesConstants.CREATE_REMOVE)
+    @ConditionalOnProperty(value = PropertiesConstants.MODE, havingValue = PropertiesConstants.CREATE_REMOVE)
     public static class C {
     }
 }

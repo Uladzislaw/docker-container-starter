@@ -11,15 +11,14 @@ import java.util.Objects;
 
 @ConfigurationProperties(PropertiesConstants.LIB_NAME)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class PostgresInDockerProperties {
+public class DeveloperProperties {
 
-    private static PostgresInDockerProperties INSTANCE;
     @Getter
     @Setter
-    private String script = PropertiesConstants.NONE;
+    private String mode = PropertiesConstants.NONE;
     @Getter
     @Setter
-    private String start_on_profile = "dev";
+    private String profile = "dev";
     @Getter
     @Setter
     private Container container = new Container();
@@ -27,9 +26,12 @@ public class PostgresInDockerProperties {
     @Setter
     private Image image = new Image();
 
-    public static synchronized PostgresInDockerProperties getInstance() {
+
+    private static DeveloperProperties INSTANCE;
+
+    public static synchronized DeveloperProperties getInstance() {
         return Objects.requireNonNullElseGet(INSTANCE, () ->
-                INSTANCE = new PostgresInDockerProperties()
+                INSTANCE = new DeveloperProperties()
         );
     }
 }
