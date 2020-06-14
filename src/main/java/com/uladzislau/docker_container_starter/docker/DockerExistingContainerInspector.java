@@ -16,8 +16,8 @@ public class DockerExistingContainerInspector {
 
     public ContainerStatus tryToFind(String container) {
         log.debug("Finding container with name: " + container);
-        DockerContainerLogCollector logCollector = new DockerContainerLogCollector();
-        List<List<String>> dockerResponse = logCollector.collectLog(
+        LogCollector logCollector = new LogCollector();
+        List<List<String>> dockerResponse = logCollector.collectSuccess(
                 TerminalScriptExecutor.executeCommand(DockerScriptConfigurator.buildScript(DockerScriptConfigurator.DockerScript.DOCKER_PS, "-a")));
         dockerResponse.remove(0);
         Optional<List<String>> containerCandidate = dockerResponse.stream()
