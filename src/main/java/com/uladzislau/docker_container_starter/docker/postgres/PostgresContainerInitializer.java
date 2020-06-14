@@ -2,6 +2,7 @@ package com.uladzislau.docker_container_starter.docker.postgres;
 
 import com.uladzislau.docker_container_starter.config.properties.classes.DeveloperProperties;
 import com.uladzislau.docker_container_starter.config.properties.constant.PropertiesConstants;
+import com.uladzislau.docker_container_starter.docker.ContainerStatus;
 import com.uladzislau.docker_container_starter.docker.DockerExistingContainerInspector;
 import com.uladzislau.docker_container_starter.docker.DockerScriptConfigurator;
 import com.uladzislau.docker_container_starter.docker.LogCollector;
@@ -26,10 +27,10 @@ public class PostgresContainerInitializer {
         log.debug("Using image name: " + image);
         log.debug("Using container name: " + container);
 
-        DockerExistingContainerInspector.ContainerStatus containerStatus = containerInspector.tryToFind(container);
-        if (containerStatus.equals(DockerExistingContainerInspector.ContainerStatus.NOT_EXISTS)) {
+        ContainerStatus containerStatus = containerInspector.tryToFind(container);
+        if (containerStatus.equals(ContainerStatus.NOT_EXISTS)) {
             runAndBuildImage(properties, logCollector, image, container);
-        } else if (containerStatus.equals(DockerExistingContainerInspector.ContainerStatus.STOPPED)) {
+        } else if (containerStatus.equals(ContainerStatus.STOPPED)) {
             reRunContainer(logCollector, container);
         }
         if (!logFile.equalsIgnoreCase(PropertiesConstants.NONE)) {

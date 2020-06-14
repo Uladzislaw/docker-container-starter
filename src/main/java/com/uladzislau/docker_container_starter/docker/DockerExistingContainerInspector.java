@@ -9,11 +9,6 @@ import java.util.Optional;
 @Slf4j
 public class DockerExistingContainerInspector {
 
-    private static boolean containerExists(String container, List<String> containers) {
-        return containers.stream()
-                .anyMatch(c -> c.equalsIgnoreCase(container));
-    }
-
     public ContainerStatus tryToFind(String container) {
         log.debug("Finding container with name: " + container);
         LogCollector logCollector = new LogCollector();
@@ -32,6 +27,11 @@ public class DockerExistingContainerInspector {
         return ContainerStatus.NOT_EXISTS;
     }
 
+    private static boolean containerExists(String container, List<String> containers) {
+        return containers.stream()
+                .anyMatch(c -> c.equalsIgnoreCase(container));
+    }
+
     private ContainerStatus defineStatus(List<String> container) {
         int statusWordIndex = 4;
         String status = container.get(statusWordIndex);
@@ -40,9 +40,5 @@ public class DockerExistingContainerInspector {
         if (status.split("\\s+")[0].equalsIgnoreCase("exited"))
             return ContainerStatus.STOPPED;
         return ContainerStatus.NOT_EXISTS;
-    }
-
-    public enum ContainerStatus {
-        RUNNING, STOPPED, NOT_EXISTS
     }
 }

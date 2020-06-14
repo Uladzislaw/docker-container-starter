@@ -3,7 +3,7 @@ package com.uladzislau.docker_container_starter.docker;
 public class DockerScriptConfigurator {
 
     public static String buildScript(DockerScript dockerScript, Object... params) {
-        return String.format(dockerScript.getPattern(), params);
+        return String.format(dockerScript.script, params);
     }
 
     public enum DockerScript {
@@ -16,14 +16,10 @@ public class DockerScriptConfigurator {
         LOG_CONTAINER_INTO_FILE("docker logs %s > %s"),
         DOCKER_PS("docker ps %s");
 
-        private final String s;
+        private final String script;
 
         DockerScript(String s) {
-            this.s = s;
-        }
-
-        public String getPattern() {
-            return s;
+            this.script = s;
         }
     }
 }
