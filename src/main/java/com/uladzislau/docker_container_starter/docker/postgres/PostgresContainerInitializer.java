@@ -3,7 +3,7 @@ package com.uladzislau.docker_container_starter.docker.postgres;
 import com.uladzislau.docker_container_starter.config.properties.classes.DeveloperProperties;
 import com.uladzislau.docker_container_starter.config.properties.constant.PropertiesConstants;
 import com.uladzislau.docker_container_starter.docker.ContainerStatus;
-import com.uladzislau.docker_container_starter.docker.DockerExistingContainerInspector;
+import com.uladzislau.docker_container_starter.docker.DockerContainerInspector;
 import com.uladzislau.docker_container_starter.docker.DockerScriptConfigurator;
 import com.uladzislau.docker_container_starter.docker.LogCollector;
 import com.uladzislau.docker_container_starter.exec.TerminalScriptExecutor;
@@ -18,7 +18,7 @@ public class PostgresContainerInitializer {
 
         LogCollector logCollector = new LogCollector();
         DeveloperProperties properties = DeveloperProperties.getInstance();
-        DockerExistingContainerInspector containerInspector = new DockerExistingContainerInspector();
+        DockerContainerInspector containerInspector = new DockerContainerInspector();
 
         String image = properties.getImage().getName();
         String container = properties.getContainer().getName();
@@ -28,11 +28,16 @@ public class PostgresContainerInitializer {
         log.debug("Using container name: " + container);
 
         ContainerStatus containerStatus = containerInspector.tryToFind(container);
-        if (containerStatus.equals(ContainerStatus.NOT_EXISTS)) {
-            runAndBuildImage(properties, logCollector, image, container);
-        } else if (containerStatus.equals(ContainerStatus.STOPPED)) {
-            reRunContainer(logCollector, container);
+        switch (containerStatus) {
+            case NOT_EXISTS:
+                runAndBuildImage(properties, logCollector, image, container);
+                break;
+            case STOPPED:
+                reRunContainer(logCollector, container);
+                break;
+            default:
         }
+        //TODO: Maybe I need get rid of this if block
         if (!logFile.equalsIgnoreCase(PropertiesConstants.NONE)) {
             logCollector.collectInternalContainerLogInFile(container,
                     logFile);

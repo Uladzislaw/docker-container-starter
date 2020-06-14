@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Slf4j
-public class DockerExistingContainerInspector {
+public class DockerContainerInspector {
 
     public ContainerStatus tryToFind(String container) {
         log.debug("Finding container with name: " + container);
